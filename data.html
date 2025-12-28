@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Management - SME Analytics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>SME Analytics</span>
+                </a>
+                
+                <div class="user-menu">
+                    <div class="avatar">JD</div>
+                    <span>John Doe</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="data.html" class="active"><i class="fas fa-database"></i> Data</a></li>
+                    <li><a href="analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li><a href="design.html"><i class="fas fa-palette"></i> Design</a></li>
+                    <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1>Data Management</h1>
+            <p>Upload and manage your business data</p>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+            <div class="card-header">
+                <h3><i class="fas fa-cloud-upload-alt"></i> Upload New Data</h3>
+            </div>
+            
+            <div class="upload-area" id="uploadArea">
+                <i class="fas fa-file-upload" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                <h3>Drag & drop your files here</h3>
+                <p style="color: var(--gray); margin: 1rem 0;">Supports CSV, Excel, JSON (Max 10MB)</p>
+                <button class="btn btn-primary">
+                    <i class="fas fa-folder-open"></i> Browse Files
+                </button>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+                <div class="input-group">
+                    <label>Data Source Name</label>
+                    <input type="text" placeholder="e.g., Sales_Q4_2024">
+                </div>
+                
+                <div class="input-group">
+                    <label>Data Type</label>
+                    <select>
+                        <option>Sales Data</option>
+                        <option>Customer Data</option>
+                        <option>Inventory</option>
+                        <option>Financial</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div style="text-align: right; margin-top: 1.5rem;">
+                <button class="btn btn-primary">
+                    <i class="fas fa-check"></i> Upload & Process
+                </button>
+            </div>
+        </div>
+
+        <!-- Datasets Table -->
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fas fa-database"></i> Available Datasets</h3>
+                <div class="filter-group">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Sales</button>
+                    <button class="filter-btn">Customers</button>
+                    <button class="filter-btn">Inventory</button>
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Dataset Name</th>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th>Last Updated</th>
+                        <th>Records</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <i class="fas fa-file-csv" style="color: var(--success); margin-right: 8px;"></i>
+                            sales_2024_q4.csv
+                        </td>
+                        <td>Sales Data</td>
+                        <td>2.4 MB</td>
+                        <td>Dec 24, 2024</td>
+                        <td>12,458</td>
+                        <td>
+                            <button class="btn btn-outline" style="padding: 6px 12px;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-outline" style="padding: 6px 12px;">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fas fa-file-excel" style="color: var(--success); margin-right: 8px;"></i>
+                            customers.xlsx
+                        </td>
+                        <td>Customer Data</td>
+                        <td>1.8 MB</td>
+                        <td>Dec 20, 2024</td>
+                        <td>8,742</td>
+                        <td>
+                            <button class="btn btn-outline" style="padding: 6px 12px;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-outline" style="padding: 6px 12px;">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fas fa-file-csv" style="color: var(--warning); margin-right: 8px;"></i>
+                            inventory.csv
+                        </td>
+                        <td>Inventory</td>
+                        <td>3.1 MB</td>
+                        <td>Dec 18, 2024</td>
+                        <td>5,621</td>
+                        <td>
+                            <button class="btn btn-outline" style="padding: 6px 12px;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-outline" style="padding: 6px 12px;">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        // Upload area interaction
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadArea = document.getElementById('uploadArea');
+            
+            uploadArea.addEventListener('click', function() {
+                this.innerHTML = `
+                    <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Processing upload...</h3>
+                    <div style="width: 100%; height: 4px; background: var(--border); margin: 1rem 0; border-radius: 2px;">
+                        <div style="width: 0%; height: 100%; background: var(--primary); border-radius: 2px; 
+                             animation: progress 2s forwards;"></div>
+                    </div>
+                    <p style="color: var(--gray);">Uploading sales_2024_q4.csv...</p>
+                `;
+                
+                // Simulate upload completion
+                setTimeout(() => {
+                    uploadArea.innerHTML = `
+                        <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--success); margin-bottom: 1rem;"></i>
+                        <h3>Upload Complete!</h3>
+                        <p style="color: var(--success); margin: 1rem 0;">sales_2024_q4.csv has been uploaded successfully</p>
+                        <button class="btn btn-primary" onclick="location.reload()">
+                            <i class="fas fa-redo"></i> Upload Another
+                        </button>
+                    `;
+                    uploadArea.style.background = '#f0f9ff';
+                    uploadArea.style.borderColor = 'var(--success)';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

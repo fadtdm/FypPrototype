@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - SME Analytics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>SME Analytics</span>
+                </a>
+                
+                <div class="user-menu">
+                    <div class="avatar">AD</div>
+                    <span>Admin</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="data.html"><i class="fas fa-database"></i> Data</a></li>
+                    <li><a href="analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li><a href="design.html"><i class="fas fa-palette"></i> Design</a></li>
+                    <li><a href="users.html" class="active"><i class="fas fa-users"></i> Users</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1>User Management</h1>
+            <p>Manage user access and permissions</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <!-- User List -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-user-friends"></i> System Users</h3>
+                    <button class="btn btn-primary" onclick="addNewUser()">
+                        <i class="fas fa-user-plus"></i> Add User
+                    </button>
+                </div>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTable">
+                        <tr data-user="admin">
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="avatar" style="width: 32px; height: 32px; font-size: 0.8rem;">AD</div>
+                                    <div>
+                                        <div style="font-weight: 500;">Admin User</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray);">admin@company.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Administrator</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <button class="btn btn-outline" style="padding: 6px 12px;" 
+                                        onclick="editUser('admin')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr data-user="manager">
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="avatar" style="width: 32px; height: 32px; font-size: 0.8rem; background: var(--secondary);">JS</div>
+                                    <div>
+                                        <div style="font-weight: 500;">John Smith</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray);">john@company.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Manager</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <button class="btn btn-outline" style="padding: 6px 12px;" 
+                                        onclick="editUser('manager')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr data-user="analyst">
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="avatar" style="width: 32px; height: 32px; font-size: 0.8rem; background: var(--success);">MB</div>
+                                    <div>
+                                        <div style="font-weight: 500;">Mary Brown</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray);">mary@company.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Analyst</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <button class="btn btn-outline" style="padding: 6px 12px;" 
+                                        onclick="editUser('analyst')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Permissions Panel -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-shield-alt"></i> Access Permissions</h3>
+                </div>
+                
+                <div id="permissionsPanel">
+                    <div style="padding: 1rem; background: var(--light); border-radius: 8px; margin-bottom: 1.5rem;">
+                        <h4 style="margin-bottom: 1rem;">Selected User: <span id="selectedUser">Admin User</span></h4>
+                        <div style="color: var(--gray);">Role: <span id="selectedRole">Administrator</span></div>
+                    </div>
+                    
+                    <h4 style="margin-bottom: 1rem;">Data Access Rules</h4>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Sales Data Access</span>
+                            <label style="cursor: pointer;">
+                                <input type="checkbox" checked disabled>
+                                <span style="margin-left: 8px;">Full Access</span>
+                            </label>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Customer Data Access</span>
+                            <label style="cursor: pointer;">
+                                <input type="checkbox" checked disabled>
+                                <span style="margin-left: 8px;">Full Access</span>
+                            </label>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Financial Data Access</span>
+                            <label style="cursor: pointer;">
+                                <input type="checkbox" checked disabled>
+                                <span style="margin-left: 8px;">Full Access</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <h4 style="margin-bottom: 1rem;">Row-Level Security</h4>
+                    
+                    <div class="input-group" style="margin-bottom: 1rem;">
+                        <label>Region Access</label>
+                        <select id="regionAccess" onchange="updateSecurityRules()">
+                            <option>All Regions</option>
+                            <option>North America Only</option>
+                            <option>Europe Only</option>
+                            <option>Asia Pacific Only</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group" style="margin-bottom: 1rem;">
+                        <label>Department Access</label>
+                        <select id="deptAccess" onchange="updateSecurityRules()">
+                            <option>All Departments</option>
+                            <option>Sales Department Only</option>
+                            <option>Marketing Department Only</option>
+                            <option>Finance Department Only</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Data Range Access</label>
+                        <select id="dataRangeAccess" onchange="updateSecurityRules()">
+                            <option>All Historical Data</option>
+                            <option>Current Year Only</option>
+                            <option>Last 90 Days Only</option>
+                            <option>Custom Range</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; padding: 1rem; background: #f0f9ff; border-radius: 8px;">
+                        <h5>Current Security Rules:</h5>
+                        <div id="securityRules" style="margin-top: 0.5rem; font-size: 0.875rem;">
+                            • Full access to all data<br>
+                            • No regional restrictions<br>
+                            • Access to all departments
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: right; margin-top: 1.5rem;">
+                        <button class="btn btn-primary" onclick="savePermissions()">
+                            <i class="fas fa-save"></i> Save Permissions
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const users = {
+            'admin': {
+                name: 'Admin User',
+                email: 'admin@company.com',
+                role: 'Administrator',
+                permissions: {
+                    sales: 'Full Access',
+                    customers: 'Full Access',
+                    financial: 'Full Access',
+                    region: 'All Regions',
+                    department: 'All Departments',
+                    dataRange: 'All Historical Data'
+                }
+            },
+            'manager': {
+                name: 'John Smith',
+                email: 'john@company.com',
+                role: 'Manager',
+                permissions: {
+                    sales: 'View Only',
+                    customers: 'View Only',
+                    financial: 'Restricted',
+                    region: 'North America Only',
+                    department: 'Sales Department Only',
+                    dataRange: 'Current Year Only'
+                }
+            },
+            'analyst': {
+                name: 'Mary Brown',
+                email: 'mary@company.com',
+                role: 'Analyst',
+                permissions: {
+                    sales: 'View Only',
+                    customers: 'View Only',
+                    financial: 'View Only',
+                    region: 'All Regions',
+                    department: 'All Departments',
+                    dataRange: 'Last 90 Days Only'
+                }
+            }
+        };
+
+        let selectedUser = 'admin';
+
+        function editUser(userId) {
+            selectedUser = userId;
+            const user = users[userId];
+            
+            // Update UI
+            document.getElementById('selectedUser').textContent = user.name;
+            document.getElementById('selectedRole').textContent = user.role;
+            
+            // Update form values
+            document.getElementById('regionAccess').value = user.permissions.region;
+            document.getElementById('deptAccess').value = user.permissions.department;
+            document.getElementById('dataRangeAccess').value = user.permissions.dataRange;
+            
+            // Highlight selected row
+            document.querySelectorAll('#usersTable tr').forEach(row => {
+                row.style.background = row.dataset.user === userId ? '#f0f9ff' : '';
+            });
+            
+            updateSecurityRules();
+        }
+
+        function updateSecurityRules() {
+            const region = document.getElementById('regionAccess').value;
+            const department = document.getElementById('deptAccess').value;
+            const dataRange = document.getElementById('dataRangeAccess').value;
+            
+            const rules = [
+                `• Region: ${region}`,
+                `• Department: ${department}`,
+                `• Data Range: ${dataRange}`
+            ];
+            
+            document.getElementById('securityRules').innerHTML = rules.join('<br>');
+        }
+
+        function savePermissions() {
+            const region = document.getElementById('regionAccess').value;
+            const department = document.getElementById('deptAccess').value;
+            const dataRange = document.getElementById('dataRangeAccess').value;
+            
+            // Update user data
+            users[selectedUser].permissions.region = region;
+            users[selectedUser].permissions.department = department;
+            users[selectedUser].permissions.dataRange = dataRange;
+            
+            // Show success message
+            alert(`Permissions saved for ${users[selectedUser].name}`);
+            
+            // Update UI
+            updateSecurityRules();
+        }
+
+        function addNewUser() {
+            const newUser = {
+                name: 'New User',
+                email: 'new.user@company.com',
+                role: 'Analyst',
+                permissions: {
+                    sales: 'View Only',
+                    customers: 'View Only',
+                    financial: 'Restricted',
+                    region: 'All Regions',
+                    department: 'All Departments',
+                    dataRange: 'Current Year Only'
+                }
+            };
+            
+            // Add to table
+            const tableBody = document.getElementById('usersTable');
+            const newRow = document.createElement('tr');
+            newRow.dataset.user = 'newuser';
+            newRow.innerHTML = `
+                <td>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div class="avatar" style="width: 32px; height: 32px; font-size: 0.8rem; background: var(--warning);">NU</div>
+                        <div>
+                            <div style="font-weight: 500;">New User</div>
+                            <div style="font-size: 0.875rem; color: var(--gray);">new.user@company.com</div>
+                        </div>
+                    </div>
+                </td>
+                <td>Analyst</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
+                <td>
+                    <button class="btn btn-outline" style="padding: 6px 12px;" 
+                            onclick="editUser('newuser')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </td>
+            `;
+            tableBody.appendChild(newRow);
+            
+            // Add to users object
+            users['newuser'] = newUser;
+            
+            alert('New user added. Please configure their permissions.');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            editUser('admin');
+        });
+    </script>
+</body>
+</html>

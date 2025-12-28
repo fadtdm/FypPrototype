@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Designer - SME Analytics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .designer-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1.5rem;
+            min-height: 600px;
+        }
+        
+        .components-panel {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .designer-canvas {
+            background: #f8fafc;
+            border: 2px dashed var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            min-height: 600px;
+            position: relative;
+        }
+        
+        .dashboard-widget {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: move;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .widget-placeholder {
+            background: var(--light);
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            color: var(--gray);
+            margin: 1rem;
+        }
+        
+        .widget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .component-item {
+            padding: 12px;
+            background: var(--light);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .component-item:hover {
+            border-color: var(--primary);
+            background: white;
+        }
+        
+        .widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .widget-actions {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .widget-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>SME Analytics</span>
+                </a>
+                
+                <div class="user-menu">
+                    <div class="avatar">JD</div>
+                    <span>John Doe</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="data.html"><i class="fas fa-database"></i> Data</a></li>
+                    <li><a href="analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li><a href="design.html" class="active"><i class="fas fa-palette"></i> Design</a></li>
+                    <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1>Dashboard Designer</h1>
+            <p>Create and customize your analytics dashboard</p>
+        </div>
+
+        <div class="designer-container">
+            <!-- Components Panel -->
+            <div class="components-panel">
+                <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-shapes"></i> Components</h3>
+                
+                <div class="component-item" draggable="true" data-type="line-chart">
+                    <i class="fas fa-chart-line" style="margin-right: 8px; color: var(--primary);"></i>
+                    Line Chart
+                </div>
+                
+                <div class="component-item" draggable="true" data-type="bar-chart">
+                    <i class="fas fa-chart-bar" style="margin-right: 8px; color: var(--primary);"></i>
+                    Bar Chart
+                </div>
+                
+                <div class="component-item" draggable="true" data-type="pie-chart">
+                    <i class="fas fa-chart-pie" style="margin-right: 8px; color: var(--primary);"></i>
+                    Pie Chart
+                </div>
+                
+                <div class="component-item" draggable="true" data-type="metric-card">
+                    <i class="fas fa-hashtag" style="margin-right: 8px; color: var(--primary);"></i>
+                    Metric Card
+                </div>
+                
+                <div class="component-item" draggable="true" data-type="data-table">
+                    <i class="fas fa-table" style="margin-right: 8px; color: var(--primary);"></i>
+                    Data Table
+                </div>
+                
+                <div class="component-item" draggable="true" data-type="kpi-card">
+                    <i class="fas fa-target" style="margin-right: 8px; color: var(--primary);"></i>
+                    KPI Card
+                </div>
+                
+                <hr style="margin: 1.5rem 0; border-color: var(--border);">
+                
+                <h4 style="margin-bottom: 1rem;">Dashboard Settings</h4>
+                
+                <div class="input-group" style="margin-bottom: 1rem;">
+                    <label>Dashboard Name</label>
+                    <input type="text" id="dashboardName" value="Sales Performance">
+                </div>
+                
+                <div class="input-group" style="margin-bottom: 1rem;">
+                    <label>Layout</label>
+                    <select id="layoutType">
+                        <option>Grid Layout</option>
+                        <option>Free Form</option>
+                        <option>Single Column</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label>Theme</label>
+                    <select id="themeSelect">
+                        <option>Light Theme</option>
+                        <option>Dark Theme</option>
+                        <option>Blue Theme</option>
+                    </select>
+                </div>
+                
+                <div style="margin-top: 2rem;">
+                    <button class="btn btn-primary" style="width: 100%; margin-bottom: 10px;">
+                        <i class="fas fa-save"></i> Save Dashboard
+                    </button>
+                    <button class="btn btn-outline" style="width: 100%;">
+                        <i class="fas fa-eye"></i> Preview
+                    </button>
+                </div>
+            </div>
+
+            <!-- Design Canvas -->
+            <div class="designer-canvas" id="designCanvas">
+                <div class="widget-grid" id="widgetContainer">
+                    <!-- Existing widgets -->
+                    <div class="dashboard-widget" data-type="metric-card">
+                        <div class="widget-header">
+                            <h4>Total Revenue</h4>
+                            <div class="widget-actions">
+                                <button class="widget-btn"><i class="fas fa-cog"></i></button>
+                                <button class="widget-btn"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="stat-value">$248,560</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>12.5% from last month</span>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-widget" data-type="bar-chart">
+                        <div class="widget-header">
+                            <h4>Monthly Sales</h4>
+                            <div class="widget-actions">
+                                <button class="widget-btn"><i class="fas fa-cog"></i></button>
+                                <button class="widget-btn"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div style="height: 150px; display: flex; align-items: flex-end; gap: 10px; 
+                             margin-top: 1rem; justify-content: center;">
+                            <div style="height: 80%; width: 30px; background: var(--primary);"></div>
+                            <div style="height: 60%; width: 30px; background: var(--primary);"></div>
+                            <div style="height: 90%; width: 30px; background: var(--primary);"></div>
+                            <div style="height: 70%; width: 30px; background: var(--primary);"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-widget" data-type="pie-chart">
+                        <div class="widget-header">
+                            <h4>Revenue Distribution</h4>
+                            <div class="widget-actions">
+                                <button class="widget-btn"><i class="fas fa-cog"></i></button>
+                                <button class="widget-btn"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div style="width: 100px; height: 100px; border-radius: 50%; 
+                             background: conic-gradient(#3b82f6 0% 40%, #8b5cf6 40% 70%, 
+                             #10b981 70% 90%, #f59e0b 90% 100%); margin: 1rem auto;"></div>
+                    </div>
+                    
+                    <div class="dashboard-widget" data-type="data-table">
+                        <div class="widget-header">
+                            <h4>Top Products</h4>
+                            <div class="widget-actions">
+                                <button class="widget-btn"><i class="fas fa-cog"></i></button>
+                                <button class="widget-btn"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.875rem;">
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                <span>Product A</span>
+                                <span>$42,580</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                <span>Product B</span>
+                                <span>$38,920</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                <span>Product C</span>
+                                <span>$35,450</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="dropZone" class="widget-placeholder" style="display: none;">
+                    Drop component here
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const components = document.querySelectorAll('.component-item');
+            const canvas = document.getElementById('designCanvas');
+            const widgetContainer = document.getElementById('widgetContainer');
+            const dropZone = document.getElementById('dropZone');
+            
+            // Drag and drop functionality
+            components.forEach(component => {
+                component.addEventListener('dragstart', function(e) {
+                    e.dataTransfer.setData('text/plain', this.dataset.type);
+                    dropZone.style.display = 'block';
+                });
+            });
+            
+            canvas.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.style.borderColor = 'var(--primary)';
+                this.style.background = '#eff6ff';
+            });
+            
+            canvas.addEventListener('dragleave', function() {
+                this.style.borderColor = 'var(--border)';
+                this.style.background = '#f8fafc';
+                dropZone.style.display = 'none';
+            });
+            
+            canvas.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.style.borderColor = 'var(--border)';
+                this.style.background = '#f8fafc';
+                dropZone.style.display = 'none';
+                
+                const componentType = e.dataTransfer.getData('text/plain');
+                addWidget(componentType);
+            });
+            
+            function addWidget(type) {
+                const widget = document.createElement('div');
+                widget.className = 'dashboard-widget';
+                widget.dataset.type = type;
+                
+                switch(type) {
+                    case 'line-chart':
+                        widget.innerHTML = `
+                            <div class="widget-header">
+                                <h4>Trend Chart</h4>
+                                <div class="widget-actions">
+                                    <button class="widget-btn" onclick="configureWidget(this)"><i class="fas fa-cog"></i></button>
+                                    <button class="widget-btn" onclick="removeWidget(this)"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <div style="height: 150px; position: relative; margin-top: 1rem;">
+                                <div style="position: absolute; bottom: 0; width: 100%; height: 3px; background: var(--border);"></div>
+                                <div style="position: absolute; bottom: 20%; left: 10%; width: 80%; height: 2px; background: var(--primary);"></div>
+                                <div style="position: absolute; bottom: 50%; left: 30%; width: 60%; height: 2px; background: var(--primary);"></div>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'bar-chart':
+                        widget.innerHTML = `
+                            <div class="widget-header">
+                                <h4>Bar Chart</h4>
+                                <div class="widget-actions">
+                                    <button class="widget-btn" onclick="configureWidget(this)"><i class="fas fa-cog"></i></button>
+                                    <button class="widget-btn" onclick="removeWidget(this)"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <div style="height: 150px; display: flex; align-items: flex-end; gap: 15%; 
+                                 margin-top: 1rem; justify-content: center;">
+                                <div style="height: 40%; width: 20%; background: var(--primary);"></div>
+                                <div style="height: 70%; width: 20%; background: var(--primary);"></div>
+                                <div style="height: 90%; width: 20%; background: var(--primary);"></div>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'kpi-card':
+                        widget.innerHTML = `
+                            <div class="widget-header">
+                                <h4>KPI Card</h4>
+                                <div class="widget-actions">
+                                    <button class="widget-btn" onclick="configureWidget(this)"><i class="fas fa-cog"></i></button>
+                                    <button class="widget-btn" onclick="removeWidget(this)"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <div class="stat-value">95.8%</div>
+                            <div style="color: var(--gray); font-size: 0.875rem;">Customer Satisfaction</div>
+                            <div class="stat-change positive" style="margin-top: 0.5rem;">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>2.3% improvement</span>
+                            </div>
+                        `;
+                        break;
+                }
+                
+                widgetContainer.appendChild(widget);
+                
+                // Show success message
+                alert(`Added ${type.replace('-', ' ')} to dashboard`);
+            }
+            
+            // Make widgets draggable within canvas
+            let draggedWidget = null;
+            
+            widgetContainer.addEventListener('mousedown', function(e) {
+                if (e.target.closest('.dashboard-widget')) {
+                    draggedWidget = e.target.closest('.dashboard-widget');
+                    draggedWidget.style.opacity = '0.5';
+                }
+            });
+            
+            document.addEventListener('mousemove', function(e) {
+                if (draggedWidget) {
+                    draggedWidget.style.position = 'absolute';
+                    draggedWidget.style.left = `${e.pageX - draggedWidget.offsetWidth/2}px`;
+                    draggedWidget.style.top = `${e.pageY - draggedWidget.offsetHeight/2}px`;
+                }
+            });
+            
+            document.addEventListener('mouseup', function() {
+                if (draggedWidget) {
+                    draggedWidget.style.opacity = '1';
+                    draggedWidget.style.position = '';
+                    draggedWidget.style.left = '';
+                    draggedWidget.style.top = '';
+                    draggedWidget = null;
+                }
+            });
+        });
+        
+        function configureWidget(button) {
+            const widget = button.closest('.dashboard-widget');
+            const type = widget.dataset.type;
+            
+            alert(`Configuring ${type.replace('-', ' ')} widget\n\nIn a real application, this would open a configuration panel.`);
+        }
+        
+        function removeWidget(button) {
+            const widget = button.closest('.dashboard-widget');
+            if (confirm('Remove this widget from dashboard?')) {
+                widget.remove();
+            }
+        }
+    </script>
+</body>
+</html>
