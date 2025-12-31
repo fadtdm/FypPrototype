@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SME Business Intelligence</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>SME Analytics</span>
+                </a>
+                
+                <div class="user-menu">
+                    <div class="avatar">JD</div>
+                    <span>John Doe</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="data.html"><i class="fas fa-database"></i> Data</a></li>
+                    <li><a href="analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li><a href="design.html"><i class="fas fa-palette"></i> Design</a></li>
+                    <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1>Business Overview</h1>
+            <p>Performance metrics and key insights</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="dashboard-grid">
+            <div class="card" style="grid-column: span 3;">
+                <div class="stat-card">
+                    <h4>Total Revenue</h4>
+                    <div class="stat-value">$248,560</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>12.5% from last month</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" style="grid-column: span 3;">
+                <div class="stat-card">
+                    <h4>Active Users</h4>
+                    <div class="stat-value">1,248</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>5.2% this week</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" style="grid-column: span 3;">
+                <div class="stat-card">
+                    <h4>Conversion Rate</h4>
+                    <div class="stat-value">3.8%</div>
+                    <div class="stat-change negative">
+                        <i class="fas fa-arrow-down"></i>
+                        <span>0.3% from last week</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" style="grid-column: span 3;">
+                <div class="stat-card">
+                    <h4>Avg. Order Value</h4>
+                    <div class="stat-value">$124.50</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>8.1% increase</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="dashboard-grid" style="margin-top: 1.5rem;">
+            <!-- Sales Chart -->
+            <div class="card" style="grid-column: span 8;">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-line"></i> Monthly Sales</h3>
+                    <select class="filter-btn">
+                        <option>Last 12 months</option>
+                        <option>Last 6 months</option>
+                        <option>Last 30 days</option>
+                    </select>
+                </div>
+                
+                <div class="chart-container" id="salesChart">
+                    <!-- Interactive bars will be added by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Revenue Distribution -->
+            <div class="card" style="grid-column: span 4;">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-pie"></i> Revenue by Category</h3>
+                </div>
+                
+                <div class="pie-chart" id="revenuePie">
+                    <div class="pie-segment" data-category="Electronics" data-value="30" 
+                         style="transform: rotate(0deg);"></div>
+                    <div class="pie-segment" data-category="Clothing" data-value="25" 
+                         style="transform: rotate(108deg);"></div>
+                    <div class="pie-segment" data-category="Home & Garden" data-value="20" 
+                         style="transform: rotate(198deg);"></div>
+                    <div class="pie-segment" data-category="Books" data-value="15" 
+                         style="transform: rotate(270deg);"></div>
+                    <div class="pie-segment" data-category="Other" data-value="10" 
+                         style="transform: rotate(324deg);"></div>
+                </div>
+                
+                <div id="pieLegend" style="margin-top: 1.5rem; text-align: center;"></div>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="card" style="margin-top: 1.5rem;">
+            <div class="card-header">
+                <h3><i class="fas fa-table"></i> Recent Transactions</h3>
+                <a href="data.html" class="btn btn-outline">View All</a>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dec 24, 2024</td>
+                        <td>Acme Corp</td>
+                        <td>Premium Plan</td>
+                        <td>$2,450</td>
+                        <td><span class="status-badge status-active">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Dec 23, 2024</td>
+                        <td>Tech Solutions</td>
+                        <td>Enterprise Suite</td>
+                        <td>$8,920</td>
+                        <td><span class="status-badge status-active">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Dec 22, 2024</td>
+                        <td>Global Retail</td>
+                        <td>Business Plan</td>
+                        <td>$1,850</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>Dec 21, 2024</td>
+                        <td>Startup Inc</td>
+                        <td>Basic Plan</td>
+                        <td>$490</td>
+                        <td><span class="status-badge status-active">Completed</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip"></div>
+
+    <script>
+        // Interactive Sales Chart
+        const salesData = [
+            { month: 'Jan', value: 42000, growth: 12 },
+            { month: 'Feb', value: 52000, growth: 8 },
+            { month: 'Mar', value: 58000, growth: 15 },
+            { month: 'Apr', value: 62000, growth: 10 },
+            { month: 'May', value: 71000, growth: 18 },
+            { month: 'Jun', value: 85000, growth: 22 },
+            { month: 'Jul', value: 92000, growth: 20 },
+            { month: 'Aug', value: 88000, growth: 14 },
+            { month: 'Sep', value: 95000, growth: 19 },
+            { month: 'Oct', value: 105000, growth: 25 },
+            { month: 'Nov', value: 118000, growth: 28 },
+            { month: 'Dec', value: 125000, growth: 30 }
+        ];
+
+        function renderSalesChart() {
+            const container = document.getElementById('salesChart');
+            container.innerHTML = '';
+            
+            const maxValue = Math.max(...salesData.map(d => d.value));
+            const barWidth = (container.clientWidth - 100) / salesData.length;
+            
+            salesData.forEach((data, index) => {
+                const barHeight = (data.value / maxValue) * 200;
+                const bar = document.createElement('div');
+                bar.className = 'chart-bar';
+                bar.style.width = `${barWidth}px`;
+                bar.style.height = `${barHeight}px`;
+                bar.style.left = `${50 + index * barWidth}px`;
+                bar.dataset.month = data.month;
+                bar.dataset.value = data.value;
+                bar.dataset.growth = data.growth;
+                
+                const label = document.createElement('div');
+                label.className = 'bar-label';
+                label.textContent = data.month;
+                label.style.left = `${50 + index * barWidth + barWidth/2}px`;
+                
+                container.appendChild(bar);
+                container.appendChild(label);
+                
+                // Add click event
+                bar.addEventListener('click', function() {
+                    document.querySelectorAll('.chart-bar').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    showTooltip(this, {
+                        title: `Sales for ${data.month}`,
+                        sales: `$${data.value.toLocaleString()}`,
+                        growth: `${data.growth}% from previous month`
+                    });
+                });
+                
+                // Add hover event
+                bar.addEventListener('mouseenter', function() {
+                    showTooltip(this, {
+                        title: `Sales for ${data.month}`,
+                        sales: `$${data.value.toLocaleString()}`,
+                        growth: `${data.growth}% from previous month`
+                    });
+                });
+                
+                bar.addEventListener('mouseleave', function() {
+                    hideTooltip();
+                });
+            });
+        }
+
+        // Interactive Pie Chart
+        function setupPieChart() {
+            const pieSegments = document.querySelectorAll('.pie-segment');
+            const legend = document.getElementById('pieLegend');
+            
+            const categories = [
+                { name: 'Electronics', value: '30%', color: '#3b82f6' },
+                { name: 'Clothing', value: '25%', color: '#8b5cf6' },
+                { name: 'Home & Garden', value: '20%', color: '#10b981' },
+                { name: 'Books', value: '15%', color: '#f59e0b' },
+                { name: 'Other', value: '10%', color: '#ef4444' }
+            ];
+            
+            // Create legend
+            legend.innerHTML = categories.map(cat => `
+                <div style="display: inline-block; margin: 0 10px; cursor: pointer;" 
+                     data-category="${cat.name}">
+                    <span style="display: inline-block; width: 12px; height: 12px; 
+                          background: ${cat.color}; border-radius: 2px; margin-right: 5px;"></span>
+                    ${cat.name}: ${cat.value}
+                </div>
+            `).join('');
+            
+            // Add click events to legend items
+            legend.querySelectorAll('div').forEach(item => {
+                item.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    showTooltip(this, {
+                        title: `${category} Revenue`,
+                        value: this.textContent.split(':')[1].trim(),
+                        details: 'Click segment for more details'
+                    });
+                });
+            });
+            
+            // Add click events to pie segments
+            pieSegments.forEach(segment => {
+                segment.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    const value = this.dataset.value;
+                    showTooltip(this, {
+                        title: `${category} Revenue`,
+                        percentage: `${value}% of total`,
+                        estimated: `~$${Math.round(125000 * (value/100)).toLocaleString()}`
+                    });
+                });
+            });
+        }
+
+        // Tooltip functions
+        function showTooltip(element, data) {
+            const tooltip = document.getElementById('tooltip');
+            const rect = element.getBoundingClientRect();
+            
+            tooltip.innerHTML = `
+                <h4>${data.title}</h4>
+                ${data.sales ? `<p><strong>Sales:</strong> ${data.sales}</p>` : ''}
+                ${data.growth ? `<p><strong>Growth:</strong> ${data.growth}</p>` : ''}
+                ${data.percentage ? `<p><strong>Share:</strong> ${data.percentage}</p>` : ''}
+                ${data.estimated ? `<p><strong>Est. Revenue:</strong> ${data.estimated}</p>` : ''}
+                ${data.value ? `<p><strong>Value:</strong> ${data.value}</p>` : ''}
+                ${data.details ? `<p style="color: #6b7280; font-size: 0.8rem;">${data.details}</p>` : ''}
+            `;
+            
+            tooltip.style.display = 'block';
+            tooltip.style.left = `${rect.left + rect.width/2}px`;
+            tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10}px`;
+            
+            // Adjust if tooltip goes off screen
+            if (tooltip.getBoundingClientRect().left < 10) {
+                tooltip.style.left = '10px';
+            }
+            if (tooltip.getBoundingClientRect().right > window.innerWidth - 10) {
+                tooltip.style.left = `${window.innerWidth - tooltip.offsetWidth - 10}px`;
+            }
+        }
+
+        function hideTooltip() {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.style.display = 'none';
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            renderSalesChart();
+            setupPieChart();
+            
+            // Close tooltip when clicking elsewhere
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.chart-bar') && !e.target.closest('.pie-segment') && 
+                    !e.target.closest('#pieLegend div')) {
+                    hideTooltip();
+                    document.querySelectorAll('.chart-bar').forEach(b => b.classList.remove('active'));
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', renderSalesChart);
+        });
+    </script>
+</body>
+</html>
